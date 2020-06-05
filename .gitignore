@@ -1,0 +1,17 @@
+node_modules
+.coverage
+
+website/build
+website/data
+
+.idea
+.cache
+.vscode
+npm-debug.log
+yarn-error.log
+
+.vercel
+dist
+mjs
+cjs
+.tmp
