@@ -1,0 +1,43 @@
+{
+  "name": "@z-core/cx",
+  "private": false,
+  "version": "0.0.0",
+  "description": "Tiny util for joining class names with the most minimal API possible.",
+  "main": "./cjs/index.js",
+  "module": "./mjs/index.js",
+  "main:src": "./src/index.ts",
+  "files": [
+    "/cjs",
+    "/mjs",
+    "/src"
+  ],
+  "scripts": {
+    "prepare": "yarn build",
+    "build": "yarn build:cjs && yarn build:tsc-cjs && yarn build:mjs && yarn build:tsc-mjs",
+    "build:cjs": "NODE_ENV=cjs babel ./src/* --out-dir ./cjs --extensions '.ts,.tsx'",
+    "build:mjs": "NODE_ENV=mjs babel ./src/* --out-dir ./mjs --extensions '.ts,.tsx'",
+    "build:tsc-cjs": "tsc --declaration --emitDeclarationOnly --outDir ./cjs",
+    "build:tsc-mjs": "tsc --declaration --emitDeclarationOnly --outDir ./mjs"
+  },
+  "keywords": [
+    "classname",
+    "classnames",
+    "css",
+    "classes",
+    "cssclass",
+    "util",
+    "utility"
+  ],
+  "license": "MIT",
+  "author": "Vasyl Zubach <vasyl@zubach.com> (https://zubach.com)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vasyl-zubach/z-core-public.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vasyl-zubach/z-core-public/issues"
+  },
+  "z-core": {
+    "public": true
+  }
+}
