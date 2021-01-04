@@ -4,7 +4,7 @@
 
 Tiny util for joining class names.
 
-> Inspired by [classnames](https://www.npmjs.com/package/classnames)
+> Inspired by [classnames](https://www.npmjs.com/package/classnames) and [clsx](https://www.npmjs.com/package/clsx)
 
 ## Install
 
@@ -44,7 +44,7 @@ export MyComponnet = ({children, className}) => {
 
 ## Performance
 
-Checked with [Benchmark.js](https://benchmarkjs.com/), compared to [classnames](https://www.npmjs.com/package/classnames):
+Checked with [Benchmark.js](https://benchmarkjs.com/), compared to [classnames](https://www.npmjs.com/package/classnames) and [clsx](https://www.npmjs.com/package/clsx):
 
 <details>
   <summary>Benchmark code</summary>
@@ -52,22 +52,29 @@ Checked with [Benchmark.js](https://benchmarkjs.com/), compared to [classnames](
 ```js
 import Benchmark from 'benchmark';
 import classnames from 'classnames';
-import cx from '@z-core/cx';
+import clsx from 'clsx';
+import cx from '../src';
 
 const suite = new Benchmark.Suite();
+
+// add tests
 suite
   .add('classnames', () => {
     classnames('test', undefined, null);
     classnames('test', undefined, null, 'test2', false);
   })
+  .add('clsx', () => {
+    clsx('test', undefined, null);
+    clsx('test', undefined, null, 'test2', false);
+  })
   .add('@z-core/cx', () => {
     cx('test', undefined, null);
     cx('test', undefined, null, 'test2', false);
   })
-  .on('cycle', event => {
+  .on('cycle', (event) => {
     console.log(String(event.target));
   })
-  .on('complete', function() {
+  .on('complete', function () {
     console.log('Fastest is ' + this.filter('fastest').map('name'));
   })
   .run({ async: true });
@@ -78,8 +85,9 @@ suite
 Results on my machine:
 
 ```bash
-classnames x 4,564,464 ops/sec ±0.62% (95 runs sampled)
-@z-core/cx x 5,127,675 ops/sec ±1.38% (95 runs sampled)
+classnames x 4,506,898 ops/sec ±1.72% (90 runs sampled)
+clsx x 14,265,321 ops/sec ±1.54% (88 runs sampled)
+@z-core/cx x 16,321,970 ops/sec ±0.72% (90 runs sampled)
 Fastest is @z-core/cx
 ```
 
